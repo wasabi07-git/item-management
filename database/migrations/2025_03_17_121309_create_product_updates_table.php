@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('product_updates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->text('detail');
-            $table->string('size');
-            $table->string('category');
+            $table->foreignId('product_id')->constrained('items');  // Itemsテーブルとの外部キー
+            $table->foreignId('user_id')->constrained('users');    // Usersテーブルとの外部キー
+            $table->text('changes'); // 更新内容を保存
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('product_updates');
     }
 };

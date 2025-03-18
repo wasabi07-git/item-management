@@ -159,6 +159,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Maatwebsite\Excel\ExcelServiceProvider::class, // Excel パッケージのサービスプロバイダを追加
+        
 
         /*
          * Application Service Providers...
@@ -168,7 +170,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-    ])->toArray(),
+        ])->toArray(), 
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +185,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,   // Excel パッケージのエイリアスを追加
     ])->toArray(),
+
 
 ];

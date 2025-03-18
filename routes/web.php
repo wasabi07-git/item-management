@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +21,33 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
 
 Route::prefix('items')->group(function () {
-    Route::get('/', [App\Http\Controllers\ItemController::class, 'index']);
-    Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
-    Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
+    // 商品一覧ページ (GET)
+    Route::get('/', [ItemController::class, 'index'])->name('items.index');
+    
+    // 商品登録フォームページ (GET)
+    Route::get('/create', [ItemController::class, 'create'])->name('items.create');
+    
+    // 商品登録処理 (POST)
+    Route::post('/add', [ItemController::class, 'store'])->name('items.store');
+    
+    // 商品編集ページ (GET)
+    Route::get('/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+    Route::put('/{item}', [ItemController::class, 'update'])->name('items.update');
+    
+        // CSVインポート
+    Route::get('import', [ItemController::class, 'showImportForm'])->name('items.import');
+    Route::post('import', [ItemController::class, 'import'])->name('items.import');
+    
+    
+    // 商品詳細ページ (GET)
+    Route::get('/{item}', [ItemController::class, 'show'])->name('items.show');
+    // 商品削除処理 (DELETE)
+    Route::delete('/bulkDelete', [ItemController::class, 'bulkDelete'])->name('items.bulkDelete');
+
+    // 更新履歴ページ
+    Route::get('/{item}/history', [ItemController::class, 'history'])->name('items.history');
+
 });

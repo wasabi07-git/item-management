@@ -64,11 +64,11 @@ return [
     */
 
     'logo' => '<b>商品管理</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => '',
+    'logo_img_class' => '',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => '商品管理',
+    'logo_img_alt' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -293,9 +293,24 @@ return [
         [
             'text' => '商品一覧',
             'url'  => 'items',
-            'icon' => 'fas fa-gamepad',
+            'icon' => 'fas fa-tshirt',
+        ],
+        [
+            'text' => '商品登録',
+            'url'  => 'items/create',
+            'icon' => 'fas fa-clipboard',
+        ],   
+
+        [
+            'text' => 'CSVアップロード',
+            'url'  => 'items/import',
+            'icon' => 'fas fa-upload', 
         ],
 
+        
+
+        
+        
         // AdminLTEデフォルト
         /*
         // Navbar items:
@@ -313,6 +328,7 @@ return [
         // AdminLTEデフォルト
         /*
         // Sidebar items:
+        
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
@@ -452,6 +468,7 @@ return [
                 ],
             ],
         ],
+
         'Select2' => [
             'active' => false,
             'files' => [

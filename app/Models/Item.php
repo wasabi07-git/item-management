@@ -3,19 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+
 
 class Item extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    
     protected $fillable = [
-        'user_id',
-        'name',
-        'type',
-        'detail',
+        'user_id', 
+        'name', 
+        'id', 
+        'type', 
+        'detail', 
+        'created_at', 
+        'updated_at', 
+        'size', 
+        'category', 
+        'product_number', 
+        'sale_start_date', 
+        'price',
     ];
 
     /**
@@ -33,4 +48,12 @@ class Item extends Model
      */
     protected $casts = [
     ];
+
+    /**
+     * 商品更新履歴とのリレーション
+     */
+    public function updateHistories()
+    {
+        return $this->hasMany(UpdateHistory::class);
+    }
 }

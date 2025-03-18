@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('update_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->text('detail');
-            $table->string('size');
-            $table->string('category');
+            $table->foreignId('item_id')->constrained()->onDelete('cascade'); // item_id カラム
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // user_id カラム
+            $table->text('changes'); // 変更内容
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('update_histories');
     }
 };
