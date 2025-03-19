@@ -159,18 +159,27 @@ class ItemController extends Controller
         // 変更内容を記録
         $changes = [];
 
-        if ($item->name !== $request->input('name')) {
-            $changes[] = "商品名変更: " . $item->name . " → " . $request->input('name');
+        $attributes = [
+            'name' => '商品名',
+            'type' => 'タイプ',
+            'detail' => '詳細',
+            'size' => 'サイズ',
+            'category' => 'カテゴリ',
+            'product_number' => '商品番号',
+            'sale_start_date' => '販売開始日',
+            'price' => '価格'
+        ];
+
+        foreach ($attributes as $attribute => $label) {
+            $oldValue = $item->$attribute;
+            $newValue = $request->input($attribute);
+
+            // 値が異なれば変更内容を記録
+            if ($oldValue !== $newValue) {
+                $changes[] = "{$label}変更: " . $oldValue . " → " . $newValue;
+            }
         }
 
-        if ($item->price !== $request->input('price')) {
-            $changes[] = "価格変更: " . $item->price . " → " . $request->input('price');
-        }
-
-        if ($item->detail !== $request->input('detail')) {
-            $changes[] = "詳細変更: " . $item->detail . " → " . $request->input('detail');
-        }
- 
         // 商品情報の更新
         $item->update([
             'name' => $request->input('name'),

@@ -120,7 +120,7 @@
                         <!-- 表示件数 -->
                         <span>表示件数: {{ $items->count() }} </span>
                         <!-- ページネーション -->
-                        <div>
+                        <div class="text-center w-50">
                             {{ $items->links('pagination::bootstrap-4') }}
                         </div>
                     </div>

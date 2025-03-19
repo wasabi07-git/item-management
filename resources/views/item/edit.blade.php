@@ -3,12 +3,12 @@
 @section('title', '商品編集')
 
 @section('content_header')
-    <h1>商品編集</h1>
+    <h1 class="text-center">商品情報編集</h1>
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-7">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">商品情報を編集する</h3>
@@ -20,12 +20,12 @@
 
                         <div class="form-group">
                         <label for="product_number">商品番号:</label>
-                        <input type="text" name="product_number" id="product_number" value="{{ old('product_number', $item->product_number) }}"required>
+                        <input type="text" name="product_number" id="product_number" value="{{ old('product_number', $item->product_number) }}" class="form-control form-control-sm" required>
                         </div>
 
                         <div class="form-group">
                             <label for="name">商品名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $item->name) }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $item->name) }}" class="form-control form-control-sm" required>
                         </div>
 
                         <div class="form-group">
@@ -35,22 +35,26 @@
 
                         <div class="form-group">
                         <label for="category">カテゴリ</label>
-                        <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $item->category) }}">
+                        <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $item->category) }}" class="form-control form-control-sm">
                         </div>
 
                         <div class="form-group">
                             <label for="type">タイプ</label>
-                            <input type="text" class="form-control" id="type" name="type" value="{{ old('type', $item->type) }}">
+                            <select name="type" id="type" class="form-control">
+                                <option value="レディース" {{ old('type', $item->type) == 'レディース' ? 'selected' : '' }}>レディース</option>
+                                <option value="メンズ" {{ old('type', $item->type) == 'メンズ' ? 'selected' : '' }}>メンズ</option>
+                                <option value="指定なし" {{ old('type', $item->type) == '指定なし' ? 'selected' : '' }}>指定なし</option>
+                           </select>
                         </div>
 
                         <div class="form-group">
                         <label for="sale_start_date">販売開始日:</label>
-                        <input type="date" name="sale_start_date" id="sale_start_date" value="{{ old('sale_start_date', $item->sale_start_date) }}">
+                        <input type="date" name="sale_start_date" id="sale_start_date" value="{{ old('sale_start_date', $item->sale_start_date) }}" class="form-control form-control-sm">
                         </div>
                         
                         <div class="form-group">
                         <label for="price">価格:</label>
-                        <input type="number" name="price" id="price" step="0.01" value="{{ old('price', $item->price) }}"required>
+                        <input type="number" name="price" id="price" step="1000" value="{{ old('price', $item->price) }}" class="form-control form-control-sm" required>
                         </div>
 
                         <div class="form-group">
