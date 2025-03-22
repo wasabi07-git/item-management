@@ -24,32 +24,32 @@ class ItemController extends Controller
         $query = Item::query();
 
         // 商品名での検索
-        if ($request->has('search') && $request->search !== '') {
+        if ($request->has('search') && $request->search != '') {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
         // 商品番号での検索
-        if ($request->has('product_number') && $request->product_number !== '') {
+        if ($request->has('product_number') && $request->product_number != '') {
             $query->where('product_number', 'like', '%' . $request->product_number . '%');
         }
 
         // カテゴリで絞り込み
-        if ($request->has('category') && $request->category !== '') {
+        if ($request->has('category') && $request->category != '') {
             $query->where('category', $request->category);
         }
     
         // タイプで絞り込み
-        if ($request->has('type') && $request->type !== '') {
+        if ($request->has('type') && $request->type != '') {
             $query->where('type', $request->type);            
         }
 
         // 最小価格の絞り込み
-        if ($request->has('min_price') && $request->min_price !== '') {
+        if ($request->has('min_price') && $request->min_price != '') {
             $query->where('price', '>=', $request->min_price);            
         }
 
         // 最大価格の絞り込み
-        if ($request->has('max_price') && $request->max_price !== '') {
+        if ($request->has('max_price') && $request->max_price != '') {
             $query->where('price', '<=', $request->max_price);            
         }
 
