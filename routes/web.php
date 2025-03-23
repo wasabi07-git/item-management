@@ -71,4 +71,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // 一括削除
     Route::delete('bulk-delete', [AdminController::class, 'bulkDelete'])->name('bulkDelete');
+
+    Route::middleware(['auth', 'is_admin'])->group(function () {
+        Route::resource('admin', AdminController::class);
+    });
+    
 });

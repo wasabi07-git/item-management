@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        // 'auth' と 'is_admin' ミドルウェアを適用
+        $this->middleware('auth');
+        $this->middleware('is_admin');
+    }
+    
     //管理者一覧を表示
     public function index(Request $request)
     {
