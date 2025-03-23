@@ -17,7 +17,7 @@ class AdminController extends Controller
     // 管理者作成フォーム
     public function create()
     {
-        return view('admin.admins.create');
+        return view('admin.create');
     }
 
     // 管理者を新規作成
