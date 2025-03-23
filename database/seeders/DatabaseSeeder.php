@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         'password' => bcrypt('12345678'), 
         ]);
 
+        
+        User::where('id', 4)->update(['is_admin' => 1]);
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
