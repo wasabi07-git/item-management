@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // 管理者の設定（すでに存在しない場合のみ作成）
         User::firstOrCreate(
-            ['email' => 'tech.taro@tecis.com'], // 既存のメールアドレスがあれば、それを使用
+            ['email' => 'tech.taro@tecis.com'], 
             [
                 'name' => 'taro',
                 'is_admin' => true, // 管理者として設定
