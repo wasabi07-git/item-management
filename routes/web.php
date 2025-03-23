@@ -54,7 +54,7 @@ Route::prefix('items')->group(function () {
 });
 
 // 管理者権限のルート
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(function () {
     // 管理者一覧
     Route::get('/', [AdminController::class, 'index'])->name('index');
 
@@ -71,9 +71,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // 一括削除
     Route::delete('bulk-delete', [AdminController::class, 'bulkDelete'])->name('bulkDelete');
-
-    Route::middleware(['auth', 'is_admin'])->group(function () {
-        Route::resource('admin', AdminController::class);
-    });
-    
 });
