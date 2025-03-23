@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         'name' => 'taro',
         'email' => 'tech.taro@gmail.com',
         'is_admin' => true, // 管理者として設定
-        'password' => bcrypt('12345'), 
+        'password' => bcrypt('12345678'), 
         ]);
 
         // \App\Models\User::factory()->create([
