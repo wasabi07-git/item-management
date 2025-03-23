@@ -71,4 +71,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // 一括削除
     Route::delete('bulk-delete', [AdminController::class, 'bulkDelete'])->name('bulkDelete');
-})
+});
