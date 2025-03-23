@@ -13,16 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //管理者の設定
-        \App\Models\User::create([
-        'name' => 'taro',
-        'email' => 'tech.taro@gmail.com',
-        'is_admin' => true, // 管理者として設定
-        'password' => bcrypt('12345678'), 
-        ]);
-
-        
-        User::where('id', 4)->update(['is_admin' => 1]);
+        // 管理者の設定（すでに存在しない場合のみ作成）
+        User::firstOrCreate(
+            ['email' => 'tech.taro@tecis.com'], // 既存のメールアドレスがあれば、それを使用
+            [
+                'name' => 'taro',
+                'is_admin' => true, // 管理者として設定
+                'password' => bcrypt('12345678'),
+            ]
+        );
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

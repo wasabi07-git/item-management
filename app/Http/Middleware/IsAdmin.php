@@ -15,7 +15,6 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd(auth()->user()); // ここでユーザー情報を確認
         // ログインしているユーザーが管理者か確認
         if (auth()->user() && auth()->user()->is_admin) {
             return $next($request);
