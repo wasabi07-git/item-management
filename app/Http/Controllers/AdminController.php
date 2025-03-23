@@ -41,7 +41,7 @@ class AdminController extends Controller
     // 管理者編集フォーム
     public function edit(User $admin)
     {
-        return view('admin.admins.edit', compact('admin'));
+        return view('admin.edit', compact('admin'));
     }
 
     // 管理者情報の更新
