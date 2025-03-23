@@ -12,7 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        //管理者の設定
+        \App\Models\User::create([
+        'name' => 'taro',
+        'email' => 'tech.taro@gmail.com',
+        'is_admin' => true, // 管理者として設定
+        'password' => bcrypt('12345'), 
+        ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

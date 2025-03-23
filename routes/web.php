@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,23 @@ Route::prefix('items')->group(function () {
     Route::get('/{item}/history', [ItemController::class, 'history'])->name('items.history');
 
 });
+
+// 管理者権限のルート
+Route::prefix('admin')->name('admin.')->group(function () {
+    // 管理者一覧
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+
+    // 管理者作成
+    Route::get('create', [AdminController::class, 'create'])->name('create');
+    Route::post('create', [AdminController::class, 'store'])->name('store');
+
+    // 管理者編集
+    Route::get('{admin}/edit', [AdminController::class, 'edit'])->name('edit');
+    Route::put('{admin}', [AdminController::class, 'update'])->name('update');
+
+    // 管理者削除
+    Route::delete('{admin}', [AdminController::class, 'destroy'])->name('destroy');
+
+    // 一括削除
+    Route::delete('bulk-delete', [AdminController::class, 'bulkDelete'])->name('bulkDelete');
+})
