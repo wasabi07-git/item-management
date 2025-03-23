@@ -29,24 +29,33 @@ Route::prefix('items')->group(function () {
     Route::get('/', [ItemController::class, 'index'])->name('items.index');
     
     // 商品登録フォームページ (GET)
-    Route::get('/create', [ItemController::class, 'create'])->name('items.create');
+    Route::get('/create', [ItemController::class, 'create'])->name('items.create')
+        ->middleware('is_admin');
     
     // 商品登録処理 (POST)
-    Route::post('/add', [ItemController::class, 'store'])->name('items.store');
+    Route::post('/add', [ItemController::class, 'store'])->name('items.store')
+        ->middleware('is_admin');
     
     // 商品編集ページ (GET)
-    Route::get('/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
-    Route::put('/{item}', [ItemController::class, 'update'])->name('items.update');
+    Route::get('/{item}/edit', [ItemController::class, 'edit'])->name('items.edit')
+        ->middleware('is_admin');
+    
+    Route::put('/{item}', [ItemController::class, 'update'])->name('items.update')
+        ->middleware('is_admin');
     
         // CSVインポート
-    Route::get('import', [ItemController::class, 'showImportForm'])->name('items.import');
-    Route::post('import', [ItemController::class, 'import'])->name('items.import');
+    Route::get('import', [ItemController::class, 'showImportForm'])->name('items.import')
+        ->middleware('is_admin');
+    Route::post('import', [ItemController::class, 'import'])->name('items.import')
+        ->middleware('is_admin');
     
     
     // 商品詳細ページ (GET)
     Route::get('/{item}', [ItemController::class, 'show'])->name('items.show');
+    
     // 商品削除処理 (DELETE)
-    Route::delete('/bulkDelete', [ItemController::class, 'bulkDelete'])->name('items.bulkDelete');
+    Route::delete('/bulkDelete', [ItemController::class, 'bulkDelete'])->name('items.bulkDelete')
+        ->middleware('is_admin');
 
     // 更新履歴ページ
     Route::get('/{item}/history', [ItemController::class, 'history'])->name('items.history');
