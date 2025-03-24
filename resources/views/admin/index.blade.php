@@ -25,7 +25,6 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>名前</th>
                                 <th>メールアドレス</th>
                                 <th>操作</th>
@@ -34,7 +33,6 @@
                         <tbody>
                             @foreach ($admins as $admin)
                                 <tr>
-                                    <td>{{ $admin->id }}</td>
                                     <td>{{ $admin->name }}</td>
                                     <td>{{ $admin->email }}</td>
                                     <td>

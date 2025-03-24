@@ -71,17 +71,4 @@ class AdminController extends Controller
 
         return redirect()->route('admin.index')->with('success', '管理者が削除されました。');
     }
-
-    // 一括削除
-    public function bulkDelete(Request $request)
-    {
-        $validated = $request->validate([
-            'selected_ids' => 'required|array',
-        ]);
-
-        // 一括削除処理
-        User::whereIn('id', $validated['selected_ids'])->delete();
-
-        return redirect()->route('admin.index')->with('success', '選択した管理者が削除されました。');
-    }
 }
