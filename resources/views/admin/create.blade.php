@@ -4,7 +4,7 @@
 <div class="container">
     <h1>新しい管理者を作成</h1>
 
-    <form action="{{ route('admin.store') }}" method="POST">
+    <form action="{{ route('admin.store') }}" method="POST" class="col-md-7">
         @csrf
 
         <div class="form-group">

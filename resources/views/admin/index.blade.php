@@ -28,7 +28,7 @@
                     <td>{{ $admin->name }}</td>
                     <td>{{ $admin->email }}</td>
                     <td>
-                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning">編集</a>
+                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-default">編集</a>
                         
                         <!-- 削除フォーム -->
                         <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
