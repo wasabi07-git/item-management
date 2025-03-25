@@ -7,9 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <h4 class="text-center">商品管理システム</h4>
-                    
+                <div class="card-body">                    
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
