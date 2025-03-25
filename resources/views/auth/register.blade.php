@@ -8,8 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <h3>商品管理システム</h3>
-                    
+                    <h2 class="text-center">商品管理システム</h2>
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
