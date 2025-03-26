@@ -9,7 +9,6 @@ use App\Models\UpdateHistory;
 use Maatwebsite\Excel\Facades\Excel; // Excel ファサードのインポート
 use App\Imports\ItemsImport; // CSVインポート用
 
-
 class ItemController extends Controller
 {
     public function __construct()
@@ -22,9 +21,8 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        
         $query = Item::query();
-        
+
         // 商品名での検索
         if ($request->has('search') && $request->search != '') {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -50,7 +48,7 @@ class ItemController extends Controller
             $query->where('price', '>=', $request->min_price);            
         }
 
-        // 最小価格の絞り込み
+        // 最大価格の絞り込み
         if ($request->has('max_price') && $request->max_price != '') {
             $query->where('price', '<=', $request->max_price);            
         }
@@ -122,6 +120,7 @@ class ItemController extends Controller
     {
         // 商品詳細ページにデータを渡す
         $item = Item::findOrFail($id);
+
         // 商品の更新履歴を取得
         $histories = $item->updateHistories()->latest()->get();
 
@@ -151,7 +150,7 @@ class ItemController extends Controller
             'product_number' => 'required|unique:items,product_number,' . $id,   // 商品番号はユニーク
             'sale_start_date' => 'nullable|date',          // 販売開始日
             'price' => 'required|numeric|min:0',           // 価格は数値で0以上
-            ]);
+        ]);
 
         // 商品の更新処理
         $item = Item::findOrFail($id);
@@ -192,7 +191,7 @@ class ItemController extends Controller
             'price' => $request->input('price'),
         ]);
 
-            // 更新履歴を保存
+        // 更新履歴を保存
         if (!empty($changes)) {
             UpdateHistory::create([
                 'item_id' => $item->id,
@@ -200,10 +199,13 @@ class ItemController extends Controller
                 'changes' => implode(", ", $changes),
             ]);
         }
+
         return redirect()->route('items.index')->with('success', '商品が更新されました');
     }
 
-    // 商品の更新履歴ページ
+    /**
+     * 商品の更新履歴ページ
+     */
     public function history($id)
     {
         // 商品とその更新履歴を取得
@@ -229,6 +231,9 @@ class ItemController extends Controller
         return redirect()->route('items.index')->with('success', '選択された商品が削除されました');
     }
 
+    /**
+     * インポートフォーム
+     */
     public function showImportForm()
     {
         return view('item.import');
@@ -245,7 +250,6 @@ class ItemController extends Controller
         ]);
 
         // CSVファイルのインポート
-        $path = $request->file('csv_file')->getRealPath();
         Excel::import(new ItemsImport, $request->file('csv_file'));
 
         return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');

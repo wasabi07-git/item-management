@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // 管理者の設定（すでに存在しない場合のみ作成）
+        User::firstOrCreate(
+            ['email' => 'tech.taro@tecis.com'], 
+            [
+                'name' => 'taro',
+                'is_admin' => true, // 管理者として設定
+                'password' => bcrypt('12345678'),
+            ]
+        );
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

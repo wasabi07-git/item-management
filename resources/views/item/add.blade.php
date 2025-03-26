@@ -61,7 +61,7 @@
                         
                         <div class="form-group">
                             <label for="price">価格:</label>
-                            <input type="number" name="price" id="price" class="form-control form-control-sm" step="1000">
+                            <input type="number" name="price" id="price" class="form-control form-control-sm" step="1">
                         </div>
 
                         <div class="form-group">

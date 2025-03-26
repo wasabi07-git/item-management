@@ -74,6 +74,11 @@
             </div>
         </nav>
 
+                <!-- ここに共通のテキストを追加 -->
+                <div class="container mt-4">
+            <h3>商品管理システム</h3>
+        </div>
+
         <main class="py-4">
             @yield('content')
         </main>

@@ -54,7 +54,7 @@
                         
                         <div class="form-group">
                         <label for="price">価格:</label>
-                        <input type="number" name="price" id="price" step="1000" value="{{ old('price', $item->price) }}" class="form-control form-control-sm" required>
+                        <input type="number" name="price" id="price" step="1" value="{{ old('price', $item->price) }}" class="form-control form-control-sm" required>
                         </div>
 
                         <div class="form-group">

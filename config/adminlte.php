@@ -307,6 +307,12 @@ return [
             'icon' => 'fas fa-upload', 
         ],
 
+        [
+            'text' => '管理者ページ',
+            'url'  => 'admin',
+            'icon' => 'fas fa-users-cog',
+        ],
+
         
 
         
