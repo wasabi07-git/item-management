@@ -32,7 +32,13 @@
 
                     <div class="form-group">
                         <label for="price">価格</label>
-                        <p id="price">{{ number_format($item->price) }} 円</p>
+                        <p id="price">
+                            @if(is_numeric($item->price))
+                                {{ number_format((float)$item->price, 2) }} 円
+                            @else
+                                {{ $item->price }} 円
+                            @endif
+                        </p>
                     </div>
 
                     <div class="form-group">
