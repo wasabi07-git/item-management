@@ -83,28 +83,28 @@ class ItemController extends Controller
     {
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
-            // バリデーション
-            $request->validate([
-                'name' => 'required|max:100',
-                'type' => 'required|in:レディース,メンズ,指定なし',
-                'detail' => 'nullable|max:500',
-                'size' => 'nullable|string|max:100', 
-                'product_number' => 'required|unique:items',  // 商品番号はユニーク
-                'sale_start_date' => 'nullable|date',          // 販売開始日
-                'price' => 'required|numeric|min:0',           // 価格は数値で0以上
-            ]);
+            // // バリデーション
+            // $request->validate([
+            //     'name' => 'required|max:100',
+            //     'type' => 'required|in:レディース,メンズ,指定なし',
+            //     'detail' => 'nullable|max:500',
+            //     'size' => 'nullable|string|max:100', 
+            //     'product_number' => 'required|unique:items',  // 商品番号はユニーク
+            //     'sale_start_date' => 'nullable|date',          // 販売開始日
+            //     'price' => 'required|numeric|min:0',           // 価格は数値で0以上
+            // ]);
 
             // 商品登録
             Item::create([
                 'user_id' => auth()->id(),
-                'name' => $request->input('name'),
-                'type' => $request->input('type'),
-                'detail' => $request->input('detail'),
-                'size' => $request->input('size'),
-                'category' => $request->input('category'),
-                'product_number' => $request->input('product_number'),
-                'sale_start_date' => $request->input('sale_start_date'),
-                'price' => $request->input('price'),
+                'name' => $request->input('name', ''),
+                'type' => $request->input('type', ''),
+                'detail' => $request->input('detail', ''),
+                'size' => $request->input('size', ''),
+                'category' => $request->input('category', ''),
+                'product_number' => $request->input('product_number', ''),
+                'sale_start_date' => $request->input('sale_start_date', null),
+                'price' => $request->input('price', null),
             ]);
 
             return redirect('/items')->with('success', '商品が登録されました');
@@ -141,16 +141,16 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         // バリデーション
-        $request->validate([
-            'name' => 'required|max:100',
-            'type' => 'nullable|max:100',
-            'detail' => 'nullable|max:500',
-            'size' => 'nullable|string|max:100', // サイズのバリデーション
-            'color' => 'nullable|string|max:100', // カラーのバリデーション
-            'product_number' => 'required|unique:items,product_number,' . $id,   // 商品番号はユニーク
-            'sale_start_date' => 'nullable|date',          // 販売開始日
-            'price' => 'required|numeric|min:0',           // 価格は数値で0以上
-        ]);
+        // $request->validate([
+        //     'name' => 'required|max:100',
+        //     'type' => 'nullable|max:100',
+        //     'detail' => 'nullable|max:500',
+        //     'size' => 'nullable|string|max:100', // サイズのバリデーション
+        //     'color' => 'nullable|string|max:100', // カラーのバリデーション
+        //     'product_number' => 'required|unique:items,product_number,' . $id,   // 商品番号はユニーク
+        //     'sale_start_date' => 'nullable|date',          // 販売開始日
+        //     'price' => 'required|numeric|min:0',           // 価格は数値で0以上
+        // ]);
 
         // 商品の更新処理
         $item = Item::findOrFail($id);
@@ -181,14 +181,14 @@ class ItemController extends Controller
 
         // 商品情報の更新
         $item->update([
-            'name' => $request->input('name'),
-            'type' => $request->input('type'),
-            'detail' => $request->input('detail'),
-            'size' => $request->input('size'),
-            'category' => $request->input('category'),
-            'product_number' => $request->input('product_number'),
-            'sale_start_date' => $request->input('sale_start_date'),
-            'price' => $request->input('price'),
+            'name' => $request->input('name', ''),
+            'type' => $request->input('type', ''),
+            'detail' => $request->input('detail', ''),
+            'size' => $request->input('size', ''),
+            'category' => $request->input('category', ''),
+            'product_number' => $request->input('product_number', ''),
+            'sale_start_date' => $request->input('sale_start_date', null),
+            'price' => $request->input('price', null),
         ]);
 
         // 更新履歴を保存

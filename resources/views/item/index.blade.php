@@ -105,10 +105,34 @@
                                 @foreach ($items as $item)
                                     <tr>
                                         <td><input type="checkbox" name="selected_ids[]" value="{{ $item->id }}" class="itemCheckbox"></td>
-                                        <td>{{ $item->product_number }}</td>
-                                        <td><a href="{{ route('items.show', $item->id) }}">{{ $item->name }}</a></td>
-                                        <td>{{ $item->sale_start_date }}</td>
-                                        <td>{{ number_format($item->price) }} 円</td>
+                                        <td>
+                                            @if (is_numeric($item->product_number))
+                                                {{ number_format($item->product_number) }}
+                                            @else
+                                                {{ $item->product_number }}
+                                            @endif
+                                        </td>
+                                        <td><a href="{{ route('items.show', $item->id) }}">
+                                            @if (is_string($item->name))
+                                                {{ $item->name }}
+                                            @else
+                                                {{ '未設定' }}
+                                            @endif
+                                        </a></td>
+                                        <td>
+                                            @if ($item->sale_start_date && strtotime($item->sale_start_date))
+                                                {{ \Carbon\Carbon::parse($item->sale_start_date)->format('Y-m-d') }}
+                                            @else
+                                                {{ '未設定' }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (is_numeric($item->price))
+                                                {{ number_format($item->price) }} 円
+                                            @else
+                                                {{ $item->price }} 円
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
