@@ -93,7 +93,7 @@ class ItemController extends Controller
                 'product_number' => 'required|unique:items,product_number', // 商品番号は必須でユニーク
                 'sale_start_date' => 'nullable|date', // 販売開始日は日付形式
                 'price' => 'required|numeric|min:0', // 価格は必須で数値かつ0以上
-        ]);
+            ]);
 
             // 商品登録
             Item::create([
@@ -251,8 +251,7 @@ class ItemController extends Controller
         ]);
 
         try {
-            $import = new ItemsImport;
-            $import->import($request->file('csv_file'));
+            Excel::import(new ItemsImport, $request->file('csv_file'));
 
             // インポートに成功した場合
             return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');            
@@ -264,7 +263,7 @@ class ItemController extends Controller
                 $errors[] = "行 {$failure->row()} : {$failure->errors()[0]}";
             }
 
-            
+
             return redirect()->route('items.import')->withErrors($errors);
         }
     }
