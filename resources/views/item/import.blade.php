@@ -32,9 +32,6 @@
                         <div class="form-group">
                             <label for="csv_file">CSVファイル</label>
                             <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" required>
-                            @if($errors->has('csv_file'))
-                                <div class="text-danger">{{ $errors->first('csv_file') }}</div>
-                            @endif
                         </div>
                     </div>
 

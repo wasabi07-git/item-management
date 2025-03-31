@@ -250,9 +250,22 @@ class ItemController extends Controller
             'csv_file' => 'required|mimes:csv,txt|max:2048',
         ]);
 
-        // CSVファイルのインポート
-        Excel::import(new ItemsImport, $request->file('csv_file'));
+        try {
+            $import = new ItemsImport;
+            $import->import($request->file('csv_file'));
 
-        return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');
+            // インポートに成功した場合
+            return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');            
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            // エラーが発生した場合
+            $failures = $e->failures();
+            $errors = [];
+            foreach ($failures as $failure) {
+                $errors[] = "行 {$failure->row()} : {$failure->errors()[0]}";
+            }
+
+            
+            return redirect()->route('items.import')->withErrors($errors);
+        }
     }
 }
