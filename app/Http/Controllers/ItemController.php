@@ -83,16 +83,17 @@ class ItemController extends Controller
     {
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
-            // // バリデーション
-            // $request->validate([
-            //     'name' => 'required|max:100',
-            //     'type' => 'required|in:レディース,メンズ,指定なし',
-            //     'detail' => 'nullable|max:500',
-            //     'size' => 'nullable|string|max:100', 
-            //     'product_number' => 'required|unique:items',  // 商品番号はユニーク
-            //     'sale_start_date' => 'nullable|date',          // 販売開始日
-            //     'price' => 'required|numeric|min:0',           // 価格は数値で0以上
-            // ]);
+            // バリデーションルールの追加
+            $validated = $request->validate([
+                'name' => 'required|max:100', // 商品名は必須で100文字以内
+                'type' => 'nullable|max:100', // タイプは任意で100文字以内
+                'detail' => 'nullable|max:500', // 詳細は任意で500文字以内
+                'size' => 'nullable|string|max:100', // サイズは任意で100文字以内
+                'category' => 'nullable|string|max:100', // カテゴリは任意で100文字以内
+                'product_number' => 'required|unique:items,product_number', // 商品番号は必須でユニーク
+                'sale_start_date' => 'nullable|date', // 販売開始日は日付形式
+                'price' => 'required|numeric|min:0', // 価格は必須で数値かつ0以上
+        ]);
 
             // 商品登録
             Item::create([
