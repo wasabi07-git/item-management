@@ -267,6 +267,6 @@ class ItemController extends Controller
             // エラーが発生した場合
             return redirect()->route('items.import')->withErrors(['csv_file' => 'アップロードされたファイルの形式または内容に不備があります。内容を確認してください。']);
             }
+        
         }
     }
-
