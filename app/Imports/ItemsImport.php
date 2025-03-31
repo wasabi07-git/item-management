@@ -6,7 +6,8 @@ use App\Models\Item;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Validators\ValidationException;
+use Maatwebsite\Excel\Validators\ValidationException as ExcelValidationException;
+use Illuminate\Validation\ValidationException as LaravelValidationException;  // LaravelのValidationExceptionをインポート
 use Illuminate\Support\Str;
 
 class ItemsImport implements ToModel, WithHeadingRow
@@ -33,7 +34,7 @@ class ItemsImport implements ToModel, WithHeadingRow
         if ($validator->fails()) {
             // 失敗した行のエラー情報を取得
             $errors = $validator->errors()->all();
-            throw new ValidationException($validator, $errors);
+            throw new LaravelValidationException($validator);
         }
 
         // 既存のデータを取得して更新または新規作成

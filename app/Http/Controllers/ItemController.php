@@ -255,9 +255,9 @@ class ItemController extends Controller
 
             // インポートに成功した場合
             return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');            
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) {
             // エラーが発生した場合
-            $failures = $e->failures();
+            $failures = $e->errors();
             $errors = [];
             foreach ($failures as $failure) {
                 $errors[] = "行 {$failure->row()} : {$failure->errors()[0]}";
