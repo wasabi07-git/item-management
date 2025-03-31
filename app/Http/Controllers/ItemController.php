@@ -251,20 +251,22 @@ class ItemController extends Controller
         ]);
 
         try {
-            Excel::import(new ItemsImport, $request->file('csv_file'));
+            $import = new ItemsImport;
+            Excel::import($import, $request->file('csv_file'));
 
             // インポートに成功した場合
-            return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');            
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // エラーが発生した場合
-            $failures = $e->errors();
-            $errors = [];
-            foreach ($failures as $failure) {
-                $errors[] = "行 {$failure->row()} : {$failure->errors()[0]}";
+            if (count($import->getValidationErrors()) > 0) {
+                // バリデーションエラーがある場合
+                return redirect()->route('items.import')
+                    ->withErrors($import->getValidationErrors())
+                    ->withInput();
             }
 
-
-            return redirect()->route('items.import')->withErrors($errors);
+            return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');
+        } catch (\Exception $e) {
+            // エラーが発生した場合
+            return redirect()->route('items.import')->withErrors(['csv_file' => 'インポート中にエラーが発生しました。']);
+            }
         }
     }
-}
+
