@@ -265,7 +265,7 @@ class ItemController extends Controller
             return redirect()->route('items.import')->with('success', '商品データが正常にインポートされました。');
         } catch (\Exception $e) {
             // エラーが発生した場合
-            return redirect()->route('items.import')->withErrors(['csv_file' => 'インポート中にエラーが発生しました。']);
+            return redirect()->route('items.import')->withErrors(['csv_file' => 'アップロードされたファイルの形式または内容に不備があります。内容を確認してください。']);
             }
         }
     }
