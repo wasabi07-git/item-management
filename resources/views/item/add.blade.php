@@ -89,6 +89,7 @@
                         <div class="form-group">
                             <label for="detail">詳細</label>
                             <input type="text" class="form-control form-control-sm" id="detail" name="detail" placeholder="詳細説明" value="{{ old('detail') }}">
+                            <small id="detailCount" class="form-text text-muted">残り文字数: 255</small>  <!-- 文字数カウント表示用 -->
                             @if($errors->has('detail'))
                                 <div class="text-danger">{{ $errors->first('detail') }}</div>
                             @endif
