@@ -103,4 +103,25 @@
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script>
+            // 文字数カウント機能
+            document.getElementById('detail').addEventListener('input', function() {
+                var maxLength = 255;  // 最大文字数
+                var currentLength = this.value.length; // 現在の文字数
+                var remainingLength = maxLength - currentLength; // 残り文字数
+
+                // 文字数表示を更新
+                document.getElementById('detailCount').textContent = '残り文字数: ' + remainingLength;
+
+                // 文字数が255を超えた場合は警告
+                if (remainingLength < 0) {
+                    document.getElementById('detailCount').style.color = 'red';
+                } else {
+                    document.getElementById('detailCount').style.color = 'green';
+                }
+            });
+        </script>
+    @endpush
 @stop
