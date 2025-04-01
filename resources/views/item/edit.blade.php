@@ -63,16 +63,16 @@
                         </div>
 
                         <div class="form-group">
-                        <label for="sale_start_date">販売開始日:</label>
-                        <input type="date" name="sale_start_date" id="sale_start_date" value="{{ old('sale_start_date', $item->sale_start_date) }}" class="form-control form-control-sm">
+                            <label for="sale_start_date">販売開始日:</label>
+                            <input type="date" name="sale_start_date" id="sale_start_date" value="{{ old('sale_start_date', $item->sale_start_date) }}" class="form-control form-control-sm">
                             @error('sale_start_date')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="form-group">
-                        <label for="price">価格:</label>
-                        <input type="number" name="price" id="price" step="1" value="{{ old('price', $item->price) }}" class="form-control form-control-sm" required>
+                            <label for="price">価格:</label>
+                            <input type="number" name="price" id="price" step="1" value="{{ old('price', $item->price) }}" class="form-control form-control-sm" required>
                             @error('price')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -81,6 +81,7 @@
                         <div class="form-group">
                             <label for="detail">詳細</label>
                             <textarea class="form-control form-control-sm" id="detail" name="detail">{{ old('detail', $item->detail) }}</textarea>
+                            <small id="detailCount" class="form-text text-muted">残り文字数: 255</small> <!-- 文字数表示 -->
                             @error('detail')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -99,4 +100,22 @@
 @stop
 
 @section('js')
+    <script>
+        // 文字数カウント機能
+        document.getElementById('detail').addEventListener('input', function() {
+            var maxLength = 255;  // 最大文字数
+            var currentLength = this.value.length; // 現在の文字数
+            var remainingLength = maxLength - currentLength; // 残り文字数
+
+            // 文字数表示を更新
+            document.getElementById('detailCount').textContent = '残り文字数: ' + remainingLength;
+
+            // 文字数が255を超えた場合は警告
+            if (remainingLength < 0) {
+                document.getElementById('detailCount').style.color = 'red';
+            } else {
+                document.getElementById('detailCount').style.color = 'green';
+            }
+        });
+    </script>
 @stop
