@@ -19,47 +19,71 @@
                         @method('PUT')
 
                         <div class="form-group">
-                        <label for="product_number">商品番号:</label>
-                        <input type="text" name="product_number" id="product_number" value="{{ old('product_number', $item->product_number) }}" class="form-control form-control-sm" required>
+                            <label for="product_number">商品番号:</label>
+                            <input type="text" name="product_number" id="product_number" value="{{ old('product_number', $item->product_number) }}" class="form-control form-control-sm" required>
+                            @error('product_number')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="name">商品名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $item->name) }}" class="form-control form-control-sm" required>
+                            <input type="text" id="name" name="name" value="{{ old('name', $item->name) }}" class="form-control form-control-sm" required>
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="size">サイズ</label>
-                            <input type="text" class="form-control" id="size" name="size" value="{{ old('size', $item->size) }}">
+                            <input type="text" class="form-control form-control-sm" id="size" name="size" value="{{ old('size', $item->size) }}">
+                            @error('size')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                         <label for="category">カテゴリ</label>
-                        <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $item->category) }}" class="form-control form-control-sm">
+                        <input type="text" id="category" name="category" value="{{ old('category', $item->category) }}" class="form-control form-control-sm">                      
+                            @error('category')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="type">タイプ</label>
-                            <select name="type" id="type" class="form-control">
+                            <select name="type" id="type" class="form-control form-control-sm">
                                 <option value="レディース" {{ old('type', $item->type) == 'レディース' ? 'selected' : '' }}>レディース</option>
                                 <option value="メンズ" {{ old('type', $item->type) == 'メンズ' ? 'selected' : '' }}>メンズ</option>
                                 <option value="指定なし" {{ old('type', $item->type) == '指定なし' ? 'selected' : '' }}>指定なし</option>
                            </select>
+                           @error('type')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                         <label for="sale_start_date">販売開始日:</label>
                         <input type="date" name="sale_start_date" id="sale_start_date" value="{{ old('sale_start_date', $item->sale_start_date) }}" class="form-control form-control-sm">
+                            @error('sale_start_date')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                         <label for="price">価格:</label>
                         <input type="number" name="price" id="price" step="1" value="{{ old('price', $item->price) }}" class="form-control form-control-sm" required>
+                            @error('price')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="detail">詳細</label>
-                            <textarea class="form-control" id="detail" name="detail">{{ old('detail', $item->detail) }}</textarea>
+                            <textarea class="form-control form-control-sm" id="detail" name="detail">{{ old('detail', $item->detail) }}</textarea>
+                            @error('detail')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">更新する</button>
