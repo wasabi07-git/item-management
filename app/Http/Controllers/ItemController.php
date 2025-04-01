@@ -81,6 +81,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             // バリデーションルールの追加
