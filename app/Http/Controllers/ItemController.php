@@ -87,7 +87,7 @@ class ItemController extends Controller
             $validated = $request->validate([
                 'name' => 'required|max:100', // 商品名は必須で100文字以内
                 'type' => 'nullable|max:100', // タイプは任意で100文字以内
-                'detail' => 'nullable|max:500', // 詳細は任意で500文字以内
+                'detail' => 'nullable|max:255', // 詳細は任意で255文字以内
                 'size' => 'nullable|string|max:100', // サイズは任意で100文字以内
                 'category' => 'nullable|string|max:100', // カテゴリは任意で100文字以内
                 'product_number' => 'required|unique:items,product_number', // 商品番号は必須でユニーク
@@ -145,7 +145,7 @@ class ItemController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:100',  // 商品名は必須で100文字以内
             'type' => 'nullable|max:100',  // タイプは任意で100文字以内
-            'detail' => 'nullable|max:500', // 詳細は任意で500文字以内
+            'detail' => 'nullable|max:255', // 詳細は任意で500文字以内
             'size' => 'nullable|string|max:100', // サイズは任意で100文字以内
             'category' => 'nullable|string|max:100', // カテゴリは任意で100文字以内
             'product_number' => 'required|unique:items,product_number,' . $id,  // 商品番号はユニーク、更新対象のアイテムを除外
