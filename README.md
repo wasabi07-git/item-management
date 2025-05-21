@@ -1,43 +1,37 @@
 ## 商品管理システム
 
-### 環境構築手順
+## 概要
+本商品管理システムは、商品の登録・編集・検索・削除といった操作を一元的に管理できる、シンプルかつ直感的なWebアプリケーションです。<br>
+ユーザーは、商品名・タイプ・価格・カテゴリなどの商品情報を自由に追加・更新・削除でき、各商品の更新履歴も追跡可能です。<br>
+また、CSVファイルによる一括インポート機能も備えており、大量データの登録も効率的に行えます。<br>
+商品検索機能では、商品名・商品番号・カテゴリ・価格といった複数の条件による絞り込みが可能です。
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLのデータベース作成（名前：item_management）
-* Macの場合 .env の DB_PASSWORD を root に修正（Windowsは修正不要）
+## 主な機能
+・ログイン・ログアウト機能<br>
+・商品情報の登録・編集・削除<br>
+・商品検索機能<br>
+・CSV一括インポート<br>
+・更新履歴の管理<br>
 
-    ```INI
-    DB_PASSWORD=root
-    ```
+## 開発環境
+PHP 8.2.0<br>
+Laravel 10.13.5<br>
+MySQL<br>
+Git / GitHub<br>
+Heroku<br>
 
-* APP_KEY生成
+# 設計書
+[設計書ページへ](https://drive.google.com/drive/folders/1lVV-g8WZcuI5Lw_WlqxV5VAD1ZjUF92G?usp=drive_link)
 
-    ```console
-    php artisan key:generate
-    ```
+## システム閲覧
+[アプリケーションページへ](https://itemmanager-7daff103b1e3.herokuapp.com/login)
+### テストアカウント情報
+```
+・管理者アカウント
+メールアドレス : tech.taro@tecis.com
+パスワード :12345678
 
-* Composerインストール
-
-    ```console
-    composer install
-    ```
-
-* フロント環境構築
-
-    ```console
-    npm ci
-    npm run build
-    ```
-
-* マイグレーション
-
-    ```console
-    php artisan migrate
-    ```
-
-* 起動
-
-    ```console
-    php artisan serve
-    ```
+・テストアカウント		
+メールアドレス : new1@example.com
+パスワード : 12345678
+```
